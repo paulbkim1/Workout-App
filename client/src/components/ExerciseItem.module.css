@@ -1,0 +1,87 @@
+.exerciseContainer {
+  text-align: center;
+  border-top: 1px solid rgb(154, 154, 154);
+  padding-top: 1.8vh;
+  margin-bottom: 1.8vh;
+}
+
+.exerciseContainer h3 {
+  font-size: clamp(18px, calc(18px + 0.8vw), 26px);
+  font-weight: 600;
+}
+
+.exerciseContainer a {
+  text-decoration: none;
+  color: black;
+}
+
+.exerciseContainer a:hover {
+  color: #ffa500;
+}
+
+.exerciseDetails {
+  margin-top: 0.1vh;
+  display: flex;
+  justify-content: center;
+  gap: 7vw;
+}
+
+.exerciseDetails p {
+  font-size: clamp(12px, calc(12px + 0.7vw), 20px);
+}
+
+.noBorderTop {
+  border-top: none;
+}
+
+.counterContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.counterButton,
+.counterValue {
+  width: 10vw;
+  height: 10vw;
+  max-width: 28px;
+  max-height: 28px;
+  min-width: 20px;
+  min-height: 20px;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.counterButton {
+  background-color: rgb(250, 188, 72);
+  border: none;
+}
+
+.counterButton:hover {
+  background-color: rgb(255, 207, 118);
+}
+
+.deleteButton {
+  min-width: 100px;
+  max-width: 160px;
+  width: 40%;
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 8px 0;
+  font-weight: bold;
+  margin-top: 1.1vh;
+  transition: background-color 0.3s ease;
+  font-size: clamp(12px, calc(12px + 0.7vw), 20px);
+}
+
+.deleteButton:hover {
+  background-color: #ff7875;
+}

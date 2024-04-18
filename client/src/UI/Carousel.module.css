@@ -1,0 +1,65 @@
+.imageContainer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.imagesWrapper {
+  display: flex;
+}
+
+.slideImage {
+  width: 100%;
+  display: block;
+}
+
+.slideLeft,
+.slideRight {
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.slideLeft {
+  animation-name: slideLeft;
+}
+
+.slideRight {
+  animation-name: slideRight;
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.leftArrow {
+  left: 10px;
+}
+
+.rightArrow {
+  right: 10px;
+}

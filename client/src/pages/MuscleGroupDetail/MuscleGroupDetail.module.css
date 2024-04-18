@@ -1,0 +1,28 @@
+.container {
+  padding: 3vh 6vw 8vh;
+}
+
+.container a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.container a:hover {
+  color: #fa5000;
+}
+
+.exerciseContainer {
+  max-width: 800px;
+  margin: 2vh auto;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+@media (min-width: 1000px) {
+  .container h2 {
+    margin-bottom: 26px;
+  }
+}

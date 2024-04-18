@@ -1,0 +1,55 @@
+.container {
+  padding: 3vh 6vw 8vh;
+}
+
+.muscleGroupContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+  gap: 2%;
+  max-width: 600px;
+  margin: auto;
+}
+
+.muscle {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.muscleGroupContainer img {
+  width: 100%;
+  height: auto;
+}
+
+.muscleGroupContainer h3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  font-size: x-large;
+}
+
+.exploreLink {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  padding: 2% 3%;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: small;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+}
+
+@media (min-width: 768px) {
+  .muscleGroupContainer {
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  }
+}

@@ -1,0 +1,151 @@
+.header {
+  width: full;
+  min-height: 7vh;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid black;
+  background-color: #424242;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.logo:hover {
+  color: #ffa500;
+}
+
+.menuButton {
+  display: block;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(56, 56, 56, 0.5);
+  z-index: 5;
+}
+
+.nav {
+  padding: 30px 0px;
+  position: fixed;
+  width: 55vw;
+  height: 100%;
+  top: 0;
+  left: -250px;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 10;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.open {
+  transform: translateX(250px);
+}
+
+.nav h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 100%;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(178, 178, 178);
+}
+
+.nav ul {
+  gap: 20px;
+  padding-top: 20px;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.nav a:hover,
+.nav a.active {
+  color: #ffa500;
+}
+
+.logoutButton {
+  font-size: 18px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .menuButton {
+    display: none;
+  }
+
+  .nav {
+    position: static;
+    width: auto;
+    transform: none;
+    height: auto;
+    padding: 0;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: transparent;
+  }
+
+  .nav ul {
+    flex-direction: row;
+    gap: 1rem;
+    padding-top: 0;
+  }
+
+  .nav a {
+    text-decoration: none;
+    color: white;
+  }
+
+  .overlay {
+    display: none;
+  }
+
+  .nav h1 {
+    display: none;
+  }
+
+  .closeButton {
+    display: none;
+  }
+
+  .logoutButton {
+    color: white;
+  }
+}

@@ -1,0 +1,45 @@
+.container {
+  padding: 3vh 6vw 8vh;
+}
+
+.container h3 {
+  text-align: center;
+  font-size: clamp(16px, calc(16px + 0.7vw), 22px);
+}
+
+.content {
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+}
+
+.muscles {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.muscles li {
+  position: relative;
+  padding-left: 20px;
+}
+
+.muscles li::before {
+  content: "−";
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.container h4 {
+  text-align: start;
+  font-size: clamp(16px, calc(16px + 0.7vw), 22px);
+}
+
+.text {
+  font-weight: normal;
+  font-size: clamp(14px, calc(12px + 0.7vw), 18px);
+}
