@@ -40,8 +40,17 @@ export async function getExerciseDetails({ signal, id }) {
 }
 
 export const auth = async ({ authType, authData }) => {
-  const res = await http.post("/auth/" + authType, authData);
-  return res.data;
+  try {
+    const res = await http.post("/auth/" + authType, authData);
+
+    console.log("res", res);
+    if (res.status === 200) {
+      return res.data;
+    }
+  } catch (error) {
+    console.error("Authentication error:", error);
+    throw error;
+  }
 };
 
 export const addExerciseToPlan = async ({ day, exerciseId }) => {

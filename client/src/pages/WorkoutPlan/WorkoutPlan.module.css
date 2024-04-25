@@ -2,6 +2,11 @@
   padding: 3vh 6vw 8vh;
 }
 
+.loading {
+  text-align: center;
+  margin-top: 50px;
+}
+
 .noExercises {
   padding: 10px;
   text-align: center;

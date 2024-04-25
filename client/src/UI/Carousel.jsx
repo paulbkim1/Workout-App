@@ -4,7 +4,7 @@ import classes from "./Carousel.module.css";
 export default function Carousel({ images, description }) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [slideDirection, setSlideDirection] = useState("");
-  const [key, setKey] = useState(0); // Add a key state
+  const [key, setKey] = useState(0);
 
   const handlePrevImage = () => {
     setSlideDirection("right");
@@ -20,7 +20,6 @@ export default function Carousel({ images, description }) {
     );
   };
 
-  // Update the key to force re-render
   useEffect(() => {
     setKey((prevKey) => prevKey + 1);
   }, [selectedImageIndex, slideDirection]);

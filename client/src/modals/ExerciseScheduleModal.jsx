@@ -41,7 +41,7 @@ const ExerciseScheduleModal = forwardRef(function Modal({ exercise }, ref) {
     mutationFn: addExerciseToPlan,
   });
 
-  const { data, error } = useQuery({
+  const { data } = useQuery({
     queryKey: ["exercise-plan"],
     queryFn: ({ signal }) => getExercisePlan({ signal }),
   });

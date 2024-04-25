@@ -43,18 +43,15 @@ const getAllExercises = async () => {
       "exercises images muscles muscles_secondary _id category"
     ).lean();
 
-    // Initialize sets to store unique categories and muscle names
     const categoriesSet = new Set();
     const primaryMusclesSet = new Set();
     const secondaryMusclesSet = new Set();
 
     const exercises = exerciseList.map((exercise) => {
-      // Add category to the set
       if (exercise.category) {
         categoriesSet.add(exercise.category.name);
       }
 
-      // Add muscle names to their respective sets
       exercise.muscles.forEach((muscle) => primaryMusclesSet.add(muscle.name));
       exercise.muscles_secondary.forEach((muscle) =>
         secondaryMusclesSet.add(muscle.name)
@@ -75,7 +72,6 @@ const getAllExercises = async () => {
       };
     });
 
-    // Convert sets to arrays
     const labels = {
       categories: Array.from(categoriesSet),
       primaryMuscles: Array.from(primaryMusclesSet),
@@ -162,6 +158,11 @@ const getExercisePlan = async (id) => {
       ],
     });
 
+    if (!user.workoutPlan) {
+      console.error("No workout plan found for user:", id);
+      return null;
+    }
+
     const daysOfWeek = [
       "monday",
       "tuesday",
@@ -174,12 +175,11 @@ const getExercisePlan = async (id) => {
 
     const exercisePlan = daysOfWeek.reduce((acc, day) => {
       acc[day] = user.workoutPlan[day].map(({ exercise, reps, sets }) => {
-        // Assuming exercise.exercises[0] contains the desired exercise information
         const name =
           exercise.exercises.length > 0
             ? exercise.exercises[0].name
             : "Unnamed Exercise";
-        const exerciseId = exercise._id; // Assuming this is the correct ID field
+        const exerciseId = exercise._id;
         return {
           name,
           reps,
@@ -209,6 +209,11 @@ const getTodaysExercise = async (id) => {
       },
     });
 
+    if (!user.workoutPlan) {
+      console.error("No workout plan found for user:", id);
+      return null;
+    }
+
     const daysOfWeek = [
       "sunday",
       "monday",
@@ -225,12 +230,11 @@ const getTodaysExercise = async (id) => {
     console.log("Exercises:", exercises);
 
     const todaysExercises = exercises.map(({ exercise, reps, sets }) => {
-      // Accessing the name from the first element of the exercises array
       const name =
         exercise.exercises.length > 0
           ? exercise.exercises[0].name
           : "Unnamed Exercise";
-      const exerciseId = exercise._id; // Assuming this is the correct ID field
+      const exerciseId = exercise._id;
       return {
         name,
         reps,

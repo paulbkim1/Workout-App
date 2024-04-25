@@ -13,7 +13,7 @@
   cursor: pointer;
   text-decoration: none;
   color: white;
-  font-size: clamp(15px, calc(15px + 0.8vw), 24px);
+  font-size: clamp(15px, calc(15px + 0.8vw), 20px);
 }
 
 .footer span:hover {

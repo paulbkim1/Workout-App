@@ -9,23 +9,25 @@ const Dashboard = () => {
     queryFn: ({ signal }) => getTodaysExercise({ signal }),
   });
 
-  console.log(data);
+  let content;
+
   if (isLoading) {
-    return <p>Loading...</p>;
+    content = <p>Loading...</p>;
+  } else if (data && data.length > 0) {
+    content = data.map((exercise, key) => (
+      <ExerciseItem keyValue={key} exercise={exercise} />
+    ));
+  } else {
+    content = <p>No exercises for today</p>;
+  }
+  if (isLoading) {
+    content = <p>Loading...</p>;
   }
 
   return (
     <div className={classes.container}>
       <h2>Today's Workout Plan</h2>
-      <div className={classes.content}>
-        {data && data.length > 0 ? (
-          data.map((exercise, key) => (
-            <ExerciseItem keyValue={key} exercise={exercise} />
-          ))
-        ) : (
-          <p>No exercises for today</p>
-        )}
-      </div>
+      <div className={classes.content}>{content}</div>
     </div>
   );
 };

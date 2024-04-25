@@ -3,36 +3,18 @@ import { NavLink, useNavigate, useParams } from "react-router-dom";
 import classes from "./Auth.module.css";
 import { useMutation } from "@tanstack/react-query";
 import { auth } from "../../services/internalApiServices";
-import weights from "../../assets/weights.jpg";
-import { useEffect, useState } from "react";
+import weightLifting from "../../assets/weight-lifting.jpg";
 import Footer from "../../components/Footer";
+import LoginForm from "../../components/LoginForm";
+import SignupForm from "../../components/SignupForm";
+import useAuthForm from "../../hooks/useAuthForm";
 
 const Auth = () => {
-  const [inputValue, setInputValue] = useState({
-    email: "",
-    firstName: "",
-    lastName: "",
-    password: "",
-  });
-  const [didEdit, setDidEdit] = useState({
-    email: false,
-    password: false,
-  });
   const params = useParams();
   const authType = params.authType;
 
-  useEffect(() => {
-    setInputValue({
-      email: "",
-      firstName: "",
-      lastName: "",
-      password: "",
-    });
-    setDidEdit({
-      email: false,
-      password: false,
-    });
-  }, [authType]);
+  const { inputValue, setInputValue, didEdit, setDidEdit } =
+    useAuthForm(authType);
 
   const navigate = useNavigate();
   const { mutate } = useMutation({
@@ -49,6 +31,13 @@ const Auth = () => {
       expiration.setHours(expiration.getHours() + 1);
       localStorage.setItem("expiration", expiration.toISOString());
       navigate("/user/dashboard");
+    },
+    onError: (error) => {
+      if (error.response.status === 401) {
+        alert("Invalid credentials. Please try again.");
+      } else {
+        alert("An error occurred. Please try again later.");
+      }
     },
   });
 
@@ -97,159 +86,59 @@ const Auth = () => {
     mutate({ authType, authData });
   }
 
-  let content;
-
-  if (authType === "login") {
-    content = (
-      <>
-        <NavLink to="/" className={classes.navLink}>
-          &larr; Home
-        </NavLink>
-        <h1>Log in</h1>
-        <div className={classes.inputContainer}>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            value={inputValue.email}
-            onChange={(event) => handleInputChange("email", event.target.value)}
-            className={classes.input}
-          />
-        </div>
-        <div className={classes.inputContainer}>
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            value={inputValue.password}
-            onChange={(event) =>
-              handleInputChange("password", event.target.value)
-            }
-            className={classes.input}
-          />
-        </div>
-        <p>
-          Need an account?{" "}
-          <span>
-            <NavLink to="/auth/signup" className={classes.navLink}>
-              Create an account
-            </NavLink>
-          </span>
-        </p>
-        <button
-          disabled={isButtonDisabled()}
-          className={
-            isButtonDisabled() ? classes.disableButton : classes.button
-          }
-        >
-          Log in
-        </button>
-      </>
-    );
-  } else if (authType === "signup") {
-    content = (
-      <>
-        <NavLink to="/" className={classes.navLink}>
-          &larr; Home
-        </NavLink>
-        <h1>Create Account</h1>
-        <div className={classes.inputContainer}>
-          <label htmlFor="firstName">First name</label>
-          <input
-            id="firstName"
-            type="text"
-            name="firstName"
-            className={classes.input}
-            value={inputValue.firstName}
-            onChange={(event) =>
-              handleInputChange("firstName", event.target.value)
-            }
-          />
-        </div>
-        <div className={classes.inputContainer}>
-          <label htmlFor="lastName">Last name</label>
-          <input
-            id="lastName"
-            type="text"
-            name="lastName"
-            className={classes.input}
-            value={inputValue.lastName}
-            onChange={(event) =>
-              handleInputChange("lastName", event.target.value)
-            }
-          />
-        </div>
-        <div className={classes.inputContainer}>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            placeholder="example@email.com"
-            value={inputValue.email}
-            onBlur={() => handleInputBlur("email")}
-            onChange={(event) => handleInputChange("email", event.target.value)}
-            className={`${classes.input} ${
-              didEdit.email && !isEmailValid && classes.invalid
-            }`}
-          />
-          {didEdit.email && !isEmailValid && (
-            <p className={classes.invalidText}>
-              Please enter a valid email address
-            </p>
-          )}
-        </div>
-        <div className={classes.inputContainer}>
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            placeholder="Password must be at least 8 characters"
-            value={inputValue.password}
-            onBlur={() => handleInputBlur("password")}
-            onChange={(event) =>
-              handleInputChange("password", event.target.value)
-            }
-            className={`${classes.input} ${
-              didEdit.password && !isPasswordValid && classes.invalid
-            }`}
-          />
-          {didEdit.password && !isPasswordValid && (
-            <p className={classes.invalidText}>
-              Password must be at least 8 characters long
-            </p>
-          )}
-        </div>
-        <p>
-          Already have an account?{" "}
-          <span>
-            <NavLink to="/auth/login" className={classes.navLink}>
-              Log in
-            </NavLink>
-          </span>
-        </p>
-        <button
-          disabled={isButtonDisabled()}
-          className={
-            isButtonDisabled() ? classes.disableButton : classes.button
-          }
-        >
-          Create Account
-        </button>
-      </>
-    );
-  }
-
   return (
     <>
       <div className={classes.container}>
-        <img src={weights} />
+        <div className={classes.imageContainer}>
+          <img src={weightLifting} />
+        </div>
         <div className={classes.formContainer}>
+          <div>
+            <NavLink to="/" className={classes.navLink}>
+              &larr; Home
+            </NavLink>
+            <h1>{authType === "login" ? "Log in" : "Create Account"}</h1>
+          </div>
+
           <form method="post" className={classes.form} onSubmit={handleSubmit}>
-            {content}
+            {authType === "login" ? (
+              <LoginForm
+                inputValue={inputValue}
+                handleInputChange={handleInputChange}
+              />
+            ) : (
+              <SignupForm
+                inputValue={inputValue}
+                handleInputChange={handleInputChange}
+                handleInputBlur={handleInputBlur}
+                didEdit={didEdit}
+                isEmailValid={isEmailValid}
+                isPasswordValid={isPasswordValid}
+                invalid={classes.invalid}
+                invalidText={classes.invalidText}
+              />
+            )}
+            <p>
+              {authType === "login"
+                ? "Need an account?"
+                : "Already have an account?"}{" "}
+              <span>
+                <NavLink
+                  to={`/auth/${authType === "login" ? "signup" : "login"}`}
+                  className={classes.navLink}
+                >
+                  {authType === "login" ? "Create an account" : "Log in"}
+                </NavLink>
+              </span>
+            </p>
+            <button
+              disabled={isButtonDisabled()}
+              className={
+                isButtonDisabled() ? classes.disableButton : classes.button
+              }
+            >
+              {authType === "login" ? "Log in" : "Create Account"}
+            </button>
           </form>
         </div>
       </div>

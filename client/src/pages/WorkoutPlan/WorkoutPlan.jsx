@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import classes from "./WorkoutPlan.module.css";
 import { queryClient } from "../../util/http";
 import Accordion from "../../UI/Accordion";
-import ExerciseItem from "../../components/ExerciseItem"; // Ensure this component is properly implemented
+import ExerciseItem from "../../components/ExerciseItem";
 import { Link } from "react-router-dom";
 
 const WorkoutPlan = () => {
@@ -72,7 +72,7 @@ const WorkoutPlan = () => {
     setExercisePlan(updatedExercisePlan);
   };
 
-  const accordionSections = exercisePlan
+  const sections = exercisePlan
     ? Object.keys(exercisePlan).map((day) => ({
         label: day.charAt(0).toUpperCase() + day.slice(1),
         content:
@@ -100,29 +100,45 @@ const WorkoutPlan = () => {
       }))
     : [];
 
+  let content;
   if (isPending) {
-    return <p>Loading...</p>;
-  }
-
-  if (exercisePlan) {
-    return (
-      <div className={classes.container}>
-        <h2>Customize Your Routine</h2>
+    content = <p className={classes.loading}>Loading...</p>;
+  } else if (data && sections.length > 0) {
+    content = (
+      <>
         <div className={classes.accordion}>
-          <Accordion sections={accordionSections} />
+          <Accordion sections={sections} />
         </div>
+
         <div className={classes.tabs}>
-          <Tabs tabs={accordionSections} />
+          <Tabs tabs={sections} />
         </div>
+
         <button
           className={classes.updateButton}
           onClick={() => mutate(exercisePlan)}
         >
           Update
         </button>
-      </div>
+      </>
+    );
+  } else {
+    content = (
+      <p className={classes.noExercises}>
+        No workout plan found. Add an <Link to="/user/exercises">exercise</Link>{" "}
+        to your plan to get started.
+      </p>
     );
   }
+
+  console.log("data", data);
+
+  return (
+    <div className={classes.container}>
+      <h2>Customize Your Routine</h2>
+      {content}
+    </div>
+  );
 };
 
 export default WorkoutPlan;

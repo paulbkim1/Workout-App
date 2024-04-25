@@ -14,8 +14,11 @@ const handleLogin = async (req, res) => {
       token,
     });
   } catch (error) {
-    console.error("Error loging in:", error);
-    return res.status(400).json(error);
+    console.error("Error logging in:", error);
+    if (error.message === "Invalid credentials") {
+      return res.status(401).json({ error: error.message });
+    }
+    return res.status(500).json({ error: "Internal server error" });
   }
 };
 

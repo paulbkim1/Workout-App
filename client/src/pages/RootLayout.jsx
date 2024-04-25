@@ -8,10 +8,11 @@ const RootLayout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const handleTokenCheck = () => {
+    const handleTokenCheck = async () => {
       const token = getAuthToken();
-      if (!token || token === "EXPIRED") {
+      if (!token) {
         navigate("/");
+        return;
       }
     };
 
@@ -24,11 +25,9 @@ const RootLayout = () => {
     return () => clearInterval(interval);
   }, [navigate]);
 
-  const token = getAuthToken();
-
   return (
     <>
-      {token && token !== "EXPIRED" && <LandingNavigation />}
+      <LandingNavigation />
       <main>
         <Outlet />
       </main>
