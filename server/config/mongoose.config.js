@@ -1,12 +1,14 @@
 const mongoose = require("mongoose");
 
-const dbName = "Exercise-Tracker";
+const dbName = "workout-tracker"; // Replace with your actual database name
 
 mongoose
-  .connect(`mongodb://127.0.0.1:27017/${dbName}`)
+  .connect(
+    `mongodb+srv://paulbkim3:Tvbever17@workout.gukoepo.mongodb.net/${dbName}?retryWrites=true&w=majority`
+  )
   .then(() => {
-    console.log(`successfully connected to ${dbName}`);
+    console.log(`Successfully connected to ${dbName}`);
   })
   .catch((error) => {
-    console.log(`mongoose connection to ${dbName} failed: `, error);
+    console.log(`Mongoose connection to ${dbName} failed: `, error);
   });
