@@ -92,6 +92,13 @@
   color: rgb(249, 123, 56);
 }
 
+.demoAccount {
+  font-size: 16px;
+  color: rgba(33, 36, 44, 0.64);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
 @media (min-width: 768px) {
   .container {
     flex-direction: row;

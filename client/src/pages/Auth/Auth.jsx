@@ -102,10 +102,17 @@ const Auth = () => {
 
           <form method="post" className={classes.form} onSubmit={handleSubmit}>
             {authType === "login" ? (
-              <LoginForm
-                inputValue={inputValue}
-                handleInputChange={handleInputChange}
-              />
+              <>
+                <LoginForm
+                  inputValue={inputValue}
+                  handleInputChange={handleInputChange}
+                />
+                <div className={classes.demoAccount}>
+                  <p>For a demo account, use:</p>
+                  <p>Email: email@email.com</p>
+                  <p>Password: password</p>
+                </div>
+              </>
             ) : (
               <SignupForm
                 inputValue={inputValue}
