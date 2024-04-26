@@ -13,8 +13,8 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "https://workout-app-blush.vercel.app",
-      "https://workout-app-server-lovat.vercel.app",
+      "https://workout-app-blush.vercel.app/",
+      "https://workout-app-server-lovat.vercel.app/",
     ],
     methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
@@ -23,9 +23,7 @@ app.use(
 );
 
 app.use(express.json());
-app.get("/", (req, res) => {
-  res.json("Hello World");
-});
+
 app.use("/api/auth", authRouter);
 app.use(verifyToken);
 app.use("/api/exercises", exerciseRouter);
