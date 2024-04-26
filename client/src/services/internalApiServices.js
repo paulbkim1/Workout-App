@@ -5,6 +5,19 @@ const http = axios.create({
   baseURL: "https://workout-app-server-lovat.vercel.app/api",
 });
 
+http.interceptors.request.use(
+  function (config) {
+    const token = getAuthToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
+
 export const getAllExercises = async () => {
   const res = await http.get("/exercises/get-all-exercises", {
     headers: {
