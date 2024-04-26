@@ -16,8 +16,9 @@ app.use(
       "https://workout-app-blush.vercel.app",
       "https://workout-app-server-lovat.vercel.app",
     ],
-    methods: ["POST", "GET", "PUT", "DELETE"],
+    methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
   })
 );
 
