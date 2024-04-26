@@ -12,11 +12,15 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://workout-app-blush.vercel.app"],
-    methods: ["POST", "GET"],
+    origin: [
+      "https://workout-app-blush.vercel.app",
+      "https://workout-app-server-lovat.vercel.app",
+    ],
+    methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
 );
+
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
