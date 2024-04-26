@@ -2,7 +2,7 @@ import axios from "axios";
 import { getAuthToken } from "../util/auth";
 
 const http = axios.create({
-  baseURL: "https://workout-app-server-lovat.vercel.app",
+  baseURL: "https://workout-app-server-lovat.vercel.app/api",
 });
 
 export const getAllExercises = async () => {
