@@ -23,7 +23,9 @@ app.use(
 );
 
 app.use(express.json());
-
+app.get("/", (req, res) => {
+  res.json("Hello World");
+});
 app.use("/api/auth", authRouter);
 app.use(verifyToken);
 app.use("/api/exercises", exerciseRouter);
