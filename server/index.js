@@ -22,8 +22,8 @@ app.use(
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
-app.use(verifyToken);
-app.use("/api/exercises", exerciseRouter);
+// app.use(verifyToken);
+app.use("/api/exercises", exerciseRouter, verifyToken);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port} for request to respond to`);
