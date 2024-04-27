@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const dbName = "workout-tracker"; // Replace with your actual database name
+const dbName = "workout-tracker";
 
 mongoose
   .connect(
