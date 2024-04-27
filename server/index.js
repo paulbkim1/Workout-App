@@ -19,11 +19,12 @@ app.use(
   })
 );
 
+app.use(cors());
+
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
-// app.use(verifyToken);
-app.use("/api/exercises", exerciseRouter, verifyToken);
+app.use("/api/exercises", verifyToken, exerciseRouter);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port} for request to respond to`);

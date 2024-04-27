@@ -3,9 +3,9 @@ const jwt = require("jsonwebtoken");
 const KEY = "key";
 
 function verifyToken(req, res, next) {
-  // if (req.method === "OPTIONS") {
-  //   return next();
-  // }
+  if (req.method === "OPTIONS") {
+    return next();
+  }
 
   if (!req.headers.authorization) {
     return res
