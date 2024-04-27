@@ -39,6 +39,7 @@ const MuscleGroups = () => {
 
   return (
     <div className={classes.container}>
+      <h2>Muscle Groups</h2>
       {!imagesLoaded ? (
         <div className={classes.loadingSpinner}>
           <FontAwesomeIcon icon={faSpinner} spin size="3x" />
