@@ -2,6 +2,10 @@
   padding: 3vh 6vw 8vh;
 }
 
+.loadingSpinner {
+  text-align: center;
+}
+
 .muscleGroupContainer {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
