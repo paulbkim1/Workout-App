@@ -8,6 +8,7 @@ import arms from "../../assets/arms.jpeg";
 import classes from "./MuscleGroups.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
 
 const muscleGroups = [
   { name: "Abs", image: abs, path: "abs" },
