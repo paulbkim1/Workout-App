@@ -10,16 +10,14 @@ require("./config/mongoose.config");
 
 const app = express();
 
-// app.use(
-//   cors({
-//     origin: ["https://workout-app-blush.vercel.app"],
-//     methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
-//     credentials: true,
-//     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
-//   })
-// );
-
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://workout-app-blush.vercel.app"],
+    methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+  })
+);
 
 app.use(express.json());
 

@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import abs from "../../assets/abs.jpg";
 import back from "../../assets/back.jpg";
@@ -8,7 +9,6 @@ import arms from "../../assets/arms.jpeg";
 import classes from "./MuscleGroups.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
 
 const muscleGroups = [
   { name: "Abs", image: abs, path: "abs" },
@@ -21,22 +21,21 @@ const muscleGroups = [
 
 const MuscleGroups = () => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
-  const [loadedCount, setLoadedCount] = useState(0);
-
-  const handleImageLoad = () => {
-    setLoadedCount((prev) => {
-      console.log(`Loaded ${prev + 1} of ${muscleGroups.length}`);
-      return prev + 1;
-    });
-  };
 
   useEffect(() => {
-    console.log(`Current loaded count: ${loadedCount}`);
-    if (loadedCount === muscleGroups.length) {
-      console.log("All images loaded");
-      setImagesLoaded(true);
-    }
-  }, [loadedCount]);
+    const loadImage = (image) => {
+      return new Promise((resolve, reject) => {
+        const loadImg = new Image();
+        loadImg.src = image;
+        loadImg.onload = () => resolve(image);
+        loadImg.onerror = (err) => reject(err);
+      });
+    };
+
+    Promise.all(muscleGroups.map((group) => loadImage(group.image)))
+      .then(() => setImagesLoaded(true))
+      .catch((err) => console.log("Failed to load images", err));
+  }, []);
 
   return (
     <div className={classes.container}>
@@ -48,12 +47,7 @@ const MuscleGroups = () => {
         <div className={classes.muscleGroupContainer}>
           {muscleGroups.map(({ name, image, path }) => (
             <div key={name} className={classes.muscle}>
-              <img
-                src={image}
-                alt={`Picture of ${name}`}
-                onLoad={handleImageLoad}
-                onError={() => console.log(`Failed to load image: ${image}`)}
-              />
+              <img src={image} alt={`Picture of ${name}`} />
               <h3>{name}</h3>
               <Link to={path} className={classes.exploreLink}>
                 <span>EXPLORE</span> <span>&rarr;</span>
