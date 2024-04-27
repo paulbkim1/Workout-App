@@ -2,9 +2,8 @@
   padding: 3vh 6vw 8vh;
 }
 
-.loading {
+.contentContainer {
   text-align: center;
-  margin-top: 50px;
 }
 
 .noExercises {

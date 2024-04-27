@@ -11,6 +11,8 @@ import { queryClient } from "../../util/http";
 import Accordion from "../../UI/Accordion";
 import ExerciseItem from "../../components/ExerciseItem";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const WorkoutPlan = () => {
   const [exercisePlan, setExercisePlan] = useState(null);
@@ -102,7 +104,7 @@ const WorkoutPlan = () => {
 
   let content;
   if (isPending) {
-    content = <p className={classes.loading}>Loading...</p>;
+    content = <FontAwesomeIcon icon={faSpinner} spin size="3x" />;
   } else if (data && sections.length > 0) {
     content = (
       <>
@@ -131,12 +133,10 @@ const WorkoutPlan = () => {
     );
   }
 
-  console.log("data", data);
-
   return (
     <div className={classes.container}>
       <h2>Customize Your Routine</h2>
-      {content}
+      <div className={classes.contentContainer}>{content}</div>
     </div>
   );
 };

@@ -3,6 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { getExerciseDetails } from "../../services/internalApiServices";
 import { useParams } from "react-router-dom";
 import Carousal from "../../UI/Carousel";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const ExerciseDetail = () => {
   const params = useParams();
@@ -12,7 +14,7 @@ const ExerciseDetail = () => {
   });
   console.log("data:", data);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <FontAwesomeIcon icon={faSpinner} spin />;
 
   if (data) {
     return (

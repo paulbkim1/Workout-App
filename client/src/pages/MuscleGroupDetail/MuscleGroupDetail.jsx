@@ -3,6 +3,8 @@ import { NavLink, useParams } from "react-router-dom";
 import { getCategoryExercises } from "../../services/internalApiServices";
 import Card from "../../components/Card";
 import classes from "./MuscleGroupDetail.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const MuscleGroupDetail = () => {
   const params = useParams();
@@ -14,15 +16,11 @@ const MuscleGroupDetail = () => {
   console.log("Exercises:", data);
   let content;
   if (isLoading) {
-    content = "Loading...";
+    content = <FontAwesomeIcon icon={faSpinner} spin size="3x" />;
   } else if (data) {
-    content = (
-      <div className={classes.exerciseContainer}>
-        {data.map((exercise) => (
-          <Card key={exercise.id} exercise={exercise} />
-        ))}
-      </div>
-    );
+    content = data.map((exercise) => (
+      <Card key={exercise.id} exercise={exercise} />
+    ));
   }
   return (
     <div className={classes.container}>
@@ -31,7 +29,7 @@ const MuscleGroupDetail = () => {
           params.muscleGroup.slice(1)}
       </h2>
       <NavLink to="/user/muscle-groups">&larr; Back</NavLink>
-      {content}
+      <div className={classes.contentContainer}>{content}</div>
     </div>
   );
 };

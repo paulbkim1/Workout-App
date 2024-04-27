@@ -146,12 +146,12 @@ const Auth = () => {
                 isButtonDisabled() ? classes.disableButton : classes.button
               }
             >
-              {authType === "login" ? (
-                "Log in"
-              ) : authType === "signup" ? (
-                "Create Account"
-              ) : (
+              {isPending ? (
                 <FontAwesomeIcon icon={faSpinner} spin />
+              ) : authType === "login" ? (
+                "Log in"
+              ) : (
+                "Create Account"
               )}
             </button>
           </form>

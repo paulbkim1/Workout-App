@@ -4,6 +4,8 @@ import { getAllExercises } from "../../services/internalApiServices";
 import classes from "./Exercises.module.css";
 import Card from "../../components/Card";
 import Accordion from "../../UI/Accordion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const Exercises = () => {
   const { data, isLoading } = useQuery({
@@ -56,15 +58,11 @@ const Exercises = () => {
 
   let content;
   if (isLoading) {
-    content = "Loading...";
+    content = <FontAwesomeIcon icon={faSpinner} spin size="3x" />;
   } else if (filteredData.length > 0) {
-    content = (
-      <div className={classes.exerciseContainer}>
-        {filteredData.map((exercise) => (
-          <Card key={exercise._id} exercise={exercise} />
-        ))}
-      </div>
-    );
+    content = filteredData.map((exercise) => (
+      <Card key={exercise._id} exercise={exercise} />
+    ));
   } else {
     content = <p>No exercises found.</p>;
   }
@@ -95,7 +93,7 @@ const Exercises = () => {
             onSelectionChange={handleSelectionChange}
           />
         </div>
-        <div className={classes.exerciseContainer}>{content}</div>
+        <div className={classes.contentContainer}>{content}</div>
       </div>
     </div>
   );

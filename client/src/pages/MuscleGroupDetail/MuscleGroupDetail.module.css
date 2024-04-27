@@ -13,12 +13,19 @@
   color: #fa5000;
 }
 
-.exerciseContainer {
+.contentContainer {
   max-width: 800px;
   margin: 2vh auto;
   display: grid;
   gap: 10px;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.contentContainer > *:only-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 @media (min-width: 1000px) {
