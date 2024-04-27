@@ -8,6 +8,8 @@ import Footer from "../../components/Footer";
 import LoginForm from "../../components/LoginForm";
 import SignupForm from "../../components/SignupForm";
 import useAuthForm from "../../hooks/useAuthForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const Auth = () => {
   const params = useParams();
@@ -17,7 +19,7 @@ const Auth = () => {
     useAuthForm(authType);
 
   const navigate = useNavigate();
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: auth,
     onSuccess: (data) => {
       const userName = {
@@ -139,12 +141,18 @@ const Auth = () => {
               </span>
             </p>
             <button
-              disabled={isButtonDisabled()}
+              disabled={isButtonDisabled() || isPending}
               className={
                 isButtonDisabled() ? classes.disableButton : classes.button
               }
             >
-              {authType === "login" ? "Log in" : "Create Account"}
+              {authType === "login" ? (
+                "Log in"
+              ) : authType === "signup" ? (
+                "Create Account"
+              ) : (
+                <FontAwesomeIcon icon={faSpinner} spin />
+              )}
             </button>
           </form>
         </div>

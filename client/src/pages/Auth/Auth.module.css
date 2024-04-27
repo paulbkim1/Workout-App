@@ -49,6 +49,7 @@
   font-weight: 600;
   margin: 20px 0px;
   padding: 10px;
+  cursor: pointer;
 }
 
 .disableButton {
