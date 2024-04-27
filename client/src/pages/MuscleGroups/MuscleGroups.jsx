@@ -24,11 +24,16 @@ const MuscleGroups = () => {
   const [loadedCount, setLoadedCount] = useState(0);
 
   const handleImageLoad = () => {
-    setLoadedCount((prev) => prev + 1);
+    setLoadedCount((prev) => {
+      console.log(`Loaded ${prev + 1} of ${muscleGroups.length}`);
+      return prev + 1;
+    });
   };
 
   useEffect(() => {
+    console.log(`Current loaded count: ${loadedCount}`);
     if (loadedCount === muscleGroups.length) {
+      console.log("All images loaded");
       setImagesLoaded(true);
     }
   }, [loadedCount]);
@@ -47,6 +52,7 @@ const MuscleGroups = () => {
                 src={image}
                 alt={`Picture of ${name}`}
                 onLoad={handleImageLoad}
+                onError={() => console.log(`Failed to load image: ${image}`)}
               />
               <h3>{name}</h3>
               <Link to={path} className={classes.exploreLink}>

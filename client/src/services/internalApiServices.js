@@ -2,7 +2,7 @@ import axios from "axios";
 import { getAuthToken } from "../util/auth";
 
 const http = axios.create({
-  baseURL: "https://workout-app-server-lovat.vercel.app/api",
+  baseURL: "http://localhost:8000/api",
 });
 
 export const getAllExercises = async () => {
@@ -43,7 +43,6 @@ export const auth = async ({ authType, authData }) => {
   try {
     const res = await http.post("/auth/" + authType, authData);
 
-    console.log("res", res);
     if (res.status === 200) {
       return res.data;
     }

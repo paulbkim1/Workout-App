@@ -84,7 +84,6 @@ const Auth = () => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const authData = Object.fromEntries(formData);
-    console.log(authData);
     mutate({ authType, authData });
   }
 

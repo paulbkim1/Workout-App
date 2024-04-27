@@ -31,8 +31,6 @@ const Exercises = () => {
     }
   }, [data]);
 
-  console.log("filteredData", filteredData);
-
   const handleSelectionChange = (selectedItems) => {
     if (data) {
       const isSelectedItemsEmpty = Object.keys(selectedItems).every(

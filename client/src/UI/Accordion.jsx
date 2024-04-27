@@ -14,8 +14,6 @@ const Accordion = ({ sections, onSelectionChange }) => {
     }
   };
 
-  console.log("sections", sections);
-
   const handleCheckboxChange = (dataLabel, item) => {
     const isSelected = selectedItems[dataLabel]?.includes(item);
 
