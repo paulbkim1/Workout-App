@@ -3,6 +3,7 @@ import classes from "./LandingNavigation.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { queryClient } from "../util/http";
 
 const NavItem = ({ to, children, onClick }) => (
   <li>
@@ -24,6 +25,7 @@ const LandingNavigation = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userName");
     localStorage.removeItem("expiration");
+    queryClient.clear();
     navigate("/");
   };
 
